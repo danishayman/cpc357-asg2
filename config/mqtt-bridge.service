@@ -1,0 +1,14 @@
+[Unit]
+Description=MQTT to MongoDB Bridge
+After=network.target mongod.service mosquitto.service
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+WorkingDirectory=/home/YOUR_USERNAME/mqtt-mongodb-bridge
+ExecStart=/usr/bin/node bridge.js
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
