@@ -1,1 +1,43 @@
 SETUP.md
+# Credentials and sensitive files
+.env
+config.h
+secrets.json
+*.pem
+*.key
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Arduino
+*.hex
+*.elf
+*.bin
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# MongoDB
+*.wt
+*.bson
+
+# Temporary files
+tmp/
+temp/
+*.tmp
