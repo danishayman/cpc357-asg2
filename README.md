@@ -412,26 +412,6 @@ db.sensor_data.countDocuments({
 - [MongoDB Documentation](https://www.mongodb.com/docs/)
 - [Google Cloud Platform Documentation](https://cloud.google.com/docs)
 
-## Project Structure
-
-```
-cpc357-asg2/
-├── README.md              # Project documentation
-├── config/
-│   ├── mosquitto.conf     # MQTT broker configuration
-│   └── mqtt-bridge.service # Systemd service file
-├── docs/
-│   └── setup-guide.md     # Detailed setup instructions
-├── ESP32/
-│   └── smart-room.ino     # Arduino firmware for ESP32-S3
-├── scripts/
-│   ├── setup-mongodb.sh   # MongoDB installation script
-│   └── setup-server.sh    # Complete server setup script
-└── server/
-    ├── bridge.js          # MQTT to MongoDB bridge
-    └── package.json       # Node.js dependencies
-```
-
 ## License
 
 This project is created for educational purposes as part of CPC357 coursework.
