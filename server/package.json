@@ -1,9 +1,10 @@
 {
     "name": "mqtt-mongodb-bridge",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Bridge service to connect MQTT broker to MongoDB for Smart Room Monitoring",
+    "main": "bridge.js",
     "scripts": {
+        "start": "node bridge.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -11,6 +12,7 @@
     "license": "ISC",
     "type": "commonjs",
     "dependencies": {
+        "dotenv": "^16.4.5",
         "mongodb": "^7.0.0",
         "mqtt": "^5.14.1"
     }

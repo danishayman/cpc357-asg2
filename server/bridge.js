@@ -1,17 +1,18 @@
+require('dotenv').config();
 const mqtt = require('mqtt');
 const { MongoClient } = require('mongodb');
 
 // MQTT Configuration
-const mqttBroker = 'mqtt://localhost:1883';
-const mqttTopic = 'smartroom/sensors';
-const mqttUser = 'smart-room';
-const mqttPass = 'smart-room';
+const mqttBroker = process.env.MQTT_BROKER || 'mqtt://localhost:1883';
+const mqttTopic = process.env.MQTT_TOPIC || 'smartroom/sensors';
+const mqttUser = process.env.MQTT_USER || 'YOUR_MQTT_USERNAME';
+const mqttPass = process.env.MQTT_PASS || 'YOUR_MQTT_PASSWORD';
 
 // MongoDB Configuration - WITHOUT authentication
-//const mongoUrl = 'mongodb://localhost:27017';
+// const mongoUrl = 'mongodb://localhost:27017';
 
 // MongoDB Configuration - WITH authentication (use this if you set up auth)
-const mongoUrl = 'mongodb://iotuser:iotpass123@localhost:27017/smartroom_db?authSource=smartroom_db';
+const mongoUrl = process.env.MONGODB_URL || 'mongodb://YOUR_MONGO_USER:YOUR_MONGO_PASSWORD@localhost:27017/smartroom_db?authSource=smartroom_db';
 
 const dbName = 'smartroom_db';
 const collectionName = 'sensor_data';
