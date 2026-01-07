@@ -435,6 +435,7 @@ db.sensor_data.countDocuments({
 ## Team Members
 
 - MUHAMMAD DANISH AIMAN BIN MUHAMMAD NAZIR - 163371
+- MUHAMMAD HAZIQ BIN SAZALI - 163646
 
 ## References
 
