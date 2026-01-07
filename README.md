@@ -11,15 +11,16 @@ This project implements a real-time room monitoring system that collects environ
 **Hardware:**
 - Adafruit Feather ESP32-S3
 - DHT11 Temperature & Humidity Sensor
-- PIR Motion Sensor
+- IR Sensor (presence detection)
 - LED Indicator
-- Relay Module (for device control)
+- Relay Module (for fan control)
 
 **Software & Cloud:**
 - Google Cloud Platform (GCP) Compute Engine
 - Mosquitto MQTT Broker
 - MongoDB Database
 - Node.js Bridge Service
+- Express.js Dashboard with Chart.js
 
 ## System Architecture
 
@@ -27,37 +28,45 @@ This project implements a real-time room monitoring system that collects environ
 ┌─────────────────┐
 │   ESP32-S3      │
 │   - DHT11       │
-│   - PIR Sensor  │
+│   - IR Sensor   │
 │   - LED         │
 │   - Relay       │
 └────────┬────────┘
          │ WiFi/MQTT
          ↓
+┌─────────────────────────────────┐
+│        GCP VM Instance          │
+│  ┌───────────┐                  │
+│  │ Mosquitto │                  │
+│  │   MQTT    │                  │
+│  └─────┬─────┘                  │
+│        ↓                        │
+│  ┌───────────┐  ┌─────────────┐ │
+│  │  Bridge   │  │  Dashboard  │ │
+│  │  Node.js  │  │  Express.js │ │
+│  └─────┬─────┘  └──────┬──────┘ │
+│        ↓               ↓        │
+│  ┌─────────────────────────┐    │
+│  │        MongoDB          │    │
+│  └─────────────────────────┘    │
+└─────────────────────────────────┘
+         ↑
+         │ Port 3000
+         ↓
 ┌─────────────────┐
-│  GCP VM Instance│
-│  ┌───────────┐  │
-│  │ Mosquitto │  │
-│  │   MQTT    │  │
-│  └─────┬─────┘  │
-│        ↓        │
-│  ┌───────────┐  │
-│  │  Bridge   │  │
-│  │  Node.js  │  │
-│  └─────┬─────┘  │
-│        ↓        │
-│  ┌───────────┐  │
-│  │  MongoDB  │  │
-│  └───────────┘  │
+│   Web Browser   │
+│    Dashboard    │
 └─────────────────┘
 ```
 
 ## Features
 
 - Real-time temperature and humidity monitoring
-- Motion detection with automatic LED control
-- Automatic relay control based on temperature threshold
+- IR sensor toggle control for LED and fan (first trigger ON, second trigger OFF)
+- Automatic fan activation when temperature exceeds threshold (default: 30°C)
 - MQTT protocol for efficient data transmission
 - Cloud-based data storage in MongoDB
+- **Web Dashboard** with real-time charts and statistics
 - Persistent data logging with timestamps
 - Auto-restart services on VM reboot
 
@@ -70,14 +79,14 @@ This project implements a real-time room monitoring system that collects environ
 | DHT11 VCC | 3.3V | Power supply |
 | DHT11 GND | GND | Ground |
 | DHT11 DATA | GPIO 4 | Data signal |
-| PIR VCC | 5V | Power supply |
-| PIR GND | GND | Ground |
-| PIR OUT | GPIO 5 | Motion signal |
-| LED (+) | GPIO 2 | Via 220Ω resistor |
+| IR VCC | 5V | Power supply |
+| IR GND | GND | Ground |
+| IR OUT | GPIO 5 | Digital output (active LOW) |
+| LED (+) | GPIO 7 | Via 220Ω resistor |
 | LED (-) | GND | Ground |
 | Relay VCC | 5V | Power supply |
 | Relay GND | GND | Ground |
-| Relay IN | GPIO 15 | Control signal |
+| Relay IN | GPIO 39 | Control signal |
 
 ### Circuit Diagram
 *(Include your circuit diagram here)*
@@ -206,7 +215,29 @@ sudo systemctl enable mqtt-bridge
 sudo systemctl start mqtt-bridge
 ```
 
-### 5. Configure ESP32
+### 6. Run the Dashboard
+
+The dashboard provides a web interface to view sensor data and charts.
+
+```bash
+cd server
+
+# Run the dashboard (separate terminal from bridge)
+npm run dashboard
+```
+
+Access the dashboard at: `http://YOUR_VM_IP:3000`
+
+> **Note:** Ensure port 3000 is open in your GCP Firewall rules.
+
+#### Dashboard Features:
+- Real-time temperature and humidity display
+- LED and fan status indicators
+- 24-hour historical charts
+- Statistics (min/max/avg values)
+- Auto-refresh every 5 seconds
+
+### 7. Configure ESP32
 
 1. Open `ESP32/smart-room.ino` in Arduino IDE
 2. Update WiFi credentials:
