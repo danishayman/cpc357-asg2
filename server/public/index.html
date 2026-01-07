@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Room Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Smart Room Dashboard</h1>
+            <p class="subtitle">Real-time sensor monitoring</p>
+        </header>
+
+        <!-- Current Status Cards -->
+        <section class="cards">
+            <div class="card temperature">
+                <div class="card-icon">🌡️</div>
+                <div class="card-content">
+                    <span class="card-label">Temperature</span>
+                    <span class="card-value" id="temperature">--</span>
+                    <span class="card-unit">°C</span>
+                </div>
+            </div>
+            
+            <div class="card humidity">
+                <div class="card-icon">💧</div>
+                <div class="card-content">
+                    <span class="card-label">Humidity</span>
+                    <span class="card-value" id="humidity">--</span>
+                    <span class="card-unit">%</span>
+                </div>
+            </div>
+            
+            <div class="card motion">
+                <div class="card-icon">👤</div>
+                <div class="card-content">
+                    <span class="card-label">Motion</span>
+                    <span class="card-value" id="motion">--</span>
+                </div>
+            </div>
+            
+            <div class="card led">
+                <div class="card-icon">💡</div>
+                <div class="card-content">
+                    <span class="card-label">LED</span>
+                    <span class="card-value" id="led">--</span>
+                </div>
+            </div>
+            
+            <div class="card relay">
+                <div class="card-icon">🌀</div>
+                <div class="card-content">
+                    <span class="card-label">Fan</span>
+                    <span class="card-value" id="relay">--</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats">
+            <h2>📊 Statistics (Last 24 Hours)</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Avg Temp</span>
+                    <span class="stat-value" id="avgTemp">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Min/Max Temp</span>
+                    <span class="stat-value" id="tempRange">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Avg Humidity</span>
+                    <span class="stat-value" id="avgHumidity">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Readings</span>
+                    <span class="stat-value" id="totalReadings">--</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section class="charts">
+            <div class="chart-container">
+                <h3>Temperature History</h3>
+                <canvas id="tempChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Humidity History</h3>
+                <canvas id="humidityChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Last updated: <span id="lastUpdate">--</span></p>
+            <p class="device-id">Device: <span id="deviceId">--</span></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
