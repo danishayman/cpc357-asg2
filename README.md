@@ -6,10 +6,23 @@ IoT-based smart room monitoring system using ESP32-S3, MQTT, and MongoDB on Goog
 
 This project implements a real-time room monitoring system that collects environmental data (temperature, humidity) and motion detection, transmitting it to a cloud-based database for storage and analysis.
 
+---
+## CPC357 - IoT Architecture and Smart Applications
+
+Assignment 2
+
+For the attention of Dr. Mohd Nadhir Ab Wahab.
+
+Group Members:
+
+- MUHAMMAD DANISH AIMAN BIN MUHAMMAD NAZIR (163371)
+- MUHAMMAD HAZIQ BIN SAZALI (163646)
+---
+
 ### System Components
 
 **Hardware:**
-- Adafruit Feather ESP32-S3
+- Cytron Maker Feather AIOT S3 ESP32-S3
 - DHT11 Temperature & Humidity Sensor
 - IR Sensor (presence detection)
 - LED Indicator
@@ -431,11 +444,6 @@ db.sensor_data.countDocuments({
 - Wait 2 seconds after power on before reading
 
 
-
-## Team Members
-
-- MUHAMMAD DANISH AIMAN BIN MUHAMMAD NAZIR - 163371
-- MUHAMMAD HAZIQ BIN SAZALI - 163646
 
 ## References
 
